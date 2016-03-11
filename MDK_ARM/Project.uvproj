@@ -369,7 +369,7 @@
             <vShortWch>0</vShortWch>
             <VariousControls>
               <MiscControls></MiscControls>
-              <Define>USE_HT32_DRIVER, USE_HT32F1755_2755_DVB</Define>
+              <Define>USE_HT32_DRIVER, USE_HT32F1755_2755_DVB, LCD_2_8</Define>
               <Undefine></Undefine>
               <IncludePath>..\;..\library\HT32F175x_275x_Driver\inc;..\library\CMSIS\Include;..\library\Device\Holtek\HT32F175x_275x\Include;..\utilities;..\src</IncludePath>
             </VariousControls>
@@ -423,11 +423,6 @@
               <FileName>ht32f175x_275x_it.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\src\ht32f175x_275x_it.c</FilePath>
-            </File>
-            <File>
-              <FileName>Delay.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\src\Delay.c</FilePath>
             </File>
           </Files>
         </Group>

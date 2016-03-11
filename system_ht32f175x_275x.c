@@ -142,9 +142,9 @@
 #define PLL_ENABLE        (1)     /*!< 0: DISABLE, 1: ENABLE                                                */
 #define PLL_CLK_SRC       (0)     /*!< 0: HSE,  1: HSI                                                      */
 #define PLL_NF2_DIV       (18)    /*!< 1~64: DIV1~DIV64                                                     */
-#define PLL_NO2_DIV       (1)     /*!< 0: DIV1, 1: DIV2, 2: DIV4, 3: DIV8                                   */
+#define PLL_NO2_DIV       (0)     /*!< 0: DIV1, 1: DIV2, 2: DIV4, 3: DIV8                                   */
 #define HCLK_SRC          (1)     /*!< 0: PLL,  1: PLL, 2: HSE, 3: HSI                                      */
-#define HCLK_DIV          (0)     /*!< 0: DIV1, 1: DIV2, 2: DIV4, 3: DIV8                                   */
+#define HCLK_DIV          (1)     /*!< 0: DIV1, 1: DIV2, 2: DIV4, 3: DIV8                                   */
 #define WAIT_STATE        (3)     /*!< 0: WS = 0, 1: WS = 1, 2: WS = 2, 3: WS = AUTO                        */
 #define DCACHE_ENABLE     (0)     /*!< 0: DISABLE, 1: ENABLE                                                */
 #define ICACHE_ENABLE     (1)     /*!< 0: DISABLE, 1: ENABLE                                                */

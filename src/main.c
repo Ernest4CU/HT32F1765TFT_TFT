@@ -12,8 +12,7 @@
 /* Includes ------------------------------------------------------------------------------------------------*/
 #include "ht32f175x_275x.h"
 #include "ht32f175x_275x_board.h"
-#include "Delay.h"
-
+#include "picture.h"
 
 
 
@@ -67,65 +66,45 @@ extern const u32 DVB_GpioClock[DVB_GPIO_NBR];
   ***********************************************************************************************************/
 int main(void)
 {
+	int i=0;
 #if (HT32_LIB_DEBUG == 1)
   debug();
 #endif
+	SPI_LCD_Init();
+	SPI_LCD_Config();
+	  /* Set back color as black */
+  SPI_LCD_BackColorSet(Blue);
 
-  /* Check if the backup domain is ready for access so as to disable isolation.
-     Because some GPIO pins(PB4, PB5 and PB6) are located in backup bomain. */
-  CKCU_APBPerip1ClockConfig(CKCU_APBEN1_RTC, ENABLE);
-  if(PWRCU_CheckReadyAccessed() != PWRCU_OK)
-  {
-    while(1);
-  }
+  /* Set text color as yellow */
+  SPI_LCD_TextColorSet(Yellow);
 
-	  /* Enable AFIO peripheral clock */
-	CKCU_APBPerip0ClockConfig(CKCU_APBEN0_AFIO, ENABLE);  //定时器算是AFIO设备
-	CKCU_APBPerip1ClockConfig(CKCU_APBEN1_GPTM0, ENABLE);
-	GPTM_Configuration();               /* GPTM configuration */      
+  /* Display words on LCD */
+
+  SPI_LCD_StringLineDisplay(Line3, "        TJCJ        ");
+	SPI_LCD_BackColorSet(Red);
+	SPI_LCD_CharDisplay(Line0,4,'A');
+	SPI_LCD_LineDraw(Line2,20,100,Horizontal);
 	
-  /* Configure LED1, LED2, LED3 pins as output function */
-
-  /* Enable GPIO peripheral clock of output pins */
-  CKCU_APBPerip0ClockConfig(DVB_GpioClock[LED1_GPIO_ID], ENABLE);
-  CKCU_APBPerip0ClockConfig(DVB_GpioClock[LED2_GPIO_ID], ENABLE);
-  CKCU_APBPerip0ClockConfig(DVB_GpioClock[LED3_GPIO_ID], ENABLE);
-
-  /* Configure AFIO mode of output pins */
-  HT32F_DVB_GPxConfig(LED1_GPIO_ID, LED1_AFIO_PIN, LED1_AFIO_MODE);
-  HT32F_DVB_GPxConfig(LED2_GPIO_ID, LED2_AFIO_PIN, LED2_AFIO_MODE);
-  HT32F_DVB_GPxConfig(LED3_GPIO_ID, LED2_AFIO_PIN, LED3_AFIO_MODE);
-
-  /* Configure GPIO direction of output pins */
-  GPIO_DirectionConfig(LED1_GPIO_PORT, LED1_GPIO_PIN, GPIO_DIR_OUT);
-  GPIO_DirectionConfig(LED2_GPIO_PORT, LED2_GPIO_PIN, GPIO_DIR_OUT);
-  GPIO_DirectionConfig(LED3_GPIO_PORT, LED3_GPIO_PIN, GPIO_DIR_OUT);
-
-  /* Infinite loop to read data from input pin and then output to LED */
-  while(1)
-  {
-		
-    /* Read WEAKUP and then output to LED1 */
-    GPIO_WriteOutBits(LED1_GPIO_PORT, LED1_GPIO_PIN, SET);
-
-    /* Read KEY1 and then output to LED2 */
-    GPIO_WriteOutBits(LED2_GPIO_PORT, LED2_GPIO_PIN, SET);
-
-    /* Read KEY2 and then output to LED3 */
-    GPIO_WriteOutBits(LED3_GPIO_PORT, LED3_GPIO_PIN, SET);
-		DelayMS(1000);
-		
-		    /* Read WEAKUP and then output to LED1 */
-    GPIO_WriteOutBits(LED1_GPIO_PORT, LED1_GPIO_PIN, RESET);
-
-    /* Read KEY1 and then output to LED2 */
-    GPIO_WriteOutBits(LED2_GPIO_PORT, LED2_GPIO_PIN, RESET);
-
-    /* Read KEY2 and then output to LED3 */
-    GPIO_WriteOutBits(LED3_GPIO_PORT, LED3_GPIO_PIN, RESET);
-		DelayMS(1000);
-		
-  }
+	
+	SPI_LCD_RectDraw(Line1,50,10,30);
+	
+	SPI_LCD_DisplayOff();
+	SPI_LCD_delay(1000);
+	SPI_LCD_DisplayOn();
+	SPI_LCD_CircleDraw(Line7,30,30);
+	SPI_LCD_delay(500);
+	SPI_LCD_Clear(Red);
+	for(i=0;i<100;i++){
+	SPI_LCD_TextColorSet(Yellow);
+	SPI_LCD_CircleDraw(Line7,i,30);
+	SPI_LCD_TextColorSet(Red);
+	SPI_LCD_CircleDraw(Line7,i,30);
+	}
+	
+	/* Show pictures on LCD */
+  SPI_LCD_PicDraw((0),(0),16,16,HT32_Table);
+	
+	while(1);
 }
 
 #if (HT32_LIB_DEBUG == 1)
