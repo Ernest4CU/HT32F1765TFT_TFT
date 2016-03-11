@@ -1,0 +1,14 @@
+﻿2016年3月8日16:17:01
+1.CoIDE_Template中存放的是CoIDE开发工具的工程项目
+2.EWARM中存放IAR开发工具的工程项目
+3.MDK_ARM中存放MDK5开发工具的工程项目
+4.library和utilities中存放的HT32F1765的固件库
+5.src中存放的是用户源文件代码
+6.SI中存放的是SourceInsight工具的工程文件
+7..gitignore文本中存放的是github管理中忽略的内容
+8..git文件夹中存放的是github管理版本信息
+9.StructIntroduce.txt中存放的是工程架构说明
+10.readme.txt中存储的是固件库的的信息
+11.Readme.md中存储的是代码功能信息
+
+结构还可将固件库文件进一步的进行结构整合
